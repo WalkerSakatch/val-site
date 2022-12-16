@@ -1,5 +1,5 @@
 import React from 'react'
-// import {Weapon} from "../../valorant-api-helper/src/api/weapons/definitions/Weapon"
+import {Weapon} from "../../valorant-api-helper/src/api/weapons/definitions/Weapon"
 import SkinDisplay from './SkinDisplay'
 
 export default function WeaponDisplay(weapon: Weapon) {

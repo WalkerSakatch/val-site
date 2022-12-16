@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react';
-// import {Skin} from "../../valorant-api-helper/src/api/weapons/definitions/Skin"
-// import { Chroma } from '../../valorant-api-helper/src/api/weapons/definitions/Chroma';
+import {Skin} from "../../valorant-api-helper/src/api/weapons/definitions/Skin"
+import { Chroma } from '../../valorant-api-helper/src/api/weapons/definitions/Chroma';
 
 export default function SkinDisplay(skin: Skin) {
 
