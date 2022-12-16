@@ -6,7 +6,7 @@ import WeaponDisplay from './WeaponDisplay'
 
 export default function WeaponsSection() {
 
-    const [weaponData, setWeaponData] = useState<WeaponResponse>();
+    const [weaponData, setWeaponData] = useState<any>();
 
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_BASE_URL}/weapons`)
@@ -18,7 +18,7 @@ export default function WeaponsSection() {
 
     return (
         <div>
-            {weaponData?.data.map(weapon => (
+            {weaponData?.data.map((weapon: any) => (
                 <WeaponDisplay {...weapon} />
             ))}
         </div>
