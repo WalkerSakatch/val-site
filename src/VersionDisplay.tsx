@@ -4,7 +4,7 @@ import axios from "axios"
 
 export default function VersionDisplay() {
 
-    const [versionData, setVersionData] = useState<any>();
+    const [versionData, setVersionData] = useState<Version>();
 
     // const data = axios.get('http://localhost:12347/version')
     // .then(res => {
