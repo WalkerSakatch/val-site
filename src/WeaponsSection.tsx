@@ -9,7 +9,7 @@ export default function WeaponsSection() {
     const [weaponData, setWeaponData] = useState<WeaponResponse>();
 
     useEffect(() => {
-        axios.get('http://localhost:12347/weapons')
+        axios.get(`${process.env.REACT_APP_BASE_URL}/weapons`)
         .then(res => {
             setWeaponData(res.data)
         });
