@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
-import {Version} from "../../valorant-api-helper/src/api/version/definitions/Version"
+// import {Version} from "../../valorant-api-helper/src/api/version/definitions/Version"
 
 export default function VersionDisplay() {
 
