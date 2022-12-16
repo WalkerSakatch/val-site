@@ -1,9 +1,9 @@
 import React from 'react'
 import { useEffect } from 'react';
-import {Skin} from "../../valorant-api-helper/src/api/weapons/definitions/Skin"
-import { Chroma } from '../../valorant-api-helper/src/api/weapons/definitions/Chroma';
+// import {Skin} from "../../valorant-api-helper/src/api/weapons/definitions/Skin"
+// import { Chroma } from '../../valorant-api-helper/src/api/weapons/definitions/Chroma';
 
-export default function SkinDisplay(skin: Skin) {
+export default function SkinDisplay(skin: any) {
 
     // useEffect(() => {
         // console.log("skin.chromas: ", skin.chromas);
@@ -14,7 +14,7 @@ export default function SkinDisplay(skin: Skin) {
         getDisplayIcon(skin)
     }, [])
 
-    function getDisplayIcon(skin: Skin): string {
+    function getDisplayIcon(skin: any): string {
 
         //FIXME: IDK WHY I HAVE TO DO THIS WEIRD ARRAY THING.
         //FIXME: CHROMA SHOULD BE COMING IN AS AN ARRAY, BUT IT
