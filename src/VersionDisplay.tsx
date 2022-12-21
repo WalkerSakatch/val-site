@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
-// import {Version} from "../../valorant-api-helper/src/api/version/definitions/Version"
+import {Version} from "@mrbabalafe/valorant-api-helper"
 
 export default function VersionDisplay() {
 
-    const [versionData, setVersionData] = useState<any>();
+    const [versionData, setVersionData] = useState<Version>();
 
     // const data = axios.get('http://localhost:12347/version')
     // .then(res => {
