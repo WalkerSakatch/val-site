@@ -1,11 +1,12 @@
 import './App.css';
+import CacheManager from './CacheManager';
 import WeaponsSection from './WeaponsSection';
 
 function App() {
-
   return (
     <div className="App">
-        <WeaponsSection />
+      <CacheManager />
+      <WeaponsSection />
     </div>
   );
 }

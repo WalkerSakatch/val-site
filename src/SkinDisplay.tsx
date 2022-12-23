@@ -14,16 +14,6 @@ export default function SkinDisplay(skin: Skin) {
     }, [])
 
     function getDisplayIcon(skin: Skin): string {
-
-        //FIXME: IDK WHY I HAVE TO DO THIS WEIRD ARRAY THING.
-        //FIXME: CHROMA SHOULD BE COMING IN AS AN ARRAY, BUT IT
-        //FIXME: ISN'T I GUESS? PLEASE FOR THE LOVE OF GOD FIX THIS
-
-        // let chromas:Array<Chroma> = [];
-        // chromas.push(skin.chromas);
-
-        // return chromas[0][0].fullRender
-
         return skin.chromas[0].fullRender;
     }
 
