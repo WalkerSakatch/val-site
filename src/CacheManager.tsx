@@ -6,22 +6,6 @@ import React, { useEffect, useState } from 'react';
 export default function CacheManager() {
     const [versionData, setVersionData] = useState<Version>();
 
-    // useEffect(() => {
-    //     if(doesVersionRequireUpdate()) {
-            
-    //     }
-    //     axios.get(`${process.env.REACT_APP_BASE_URL}/version`).then((res) => {
-    //         if (res.status === 200) {
-    //             setVersionData(res.data);
-    //             verifyVersionInStorage(res.data);
-    //         }
-    //         console.log(res.data);
-    //     });
-    // }, []);
-
-
-    //TODO: Checking if version is current right now. Pretty sure it works
-    //TODO: Next is to save version to localstorage if it is not current;
     useEffect(() => {
         if(!versionIsCurrent()) {
             axios.get(`${process.env.REACT_APP_BASE_URL}/version`)
@@ -59,5 +43,5 @@ export default function CacheManager() {
         localStorage.setItem('version', JSON.stringify(newVersionObj));
     }
 
-    return <div>CacheManager</div>;
+    return <></>;
 }
