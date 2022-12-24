@@ -2,11 +2,13 @@ import { Version, WeaponResponse } from '@mrbabalafe/valorant-api-helper';
 import { LocalStorageVersion } from './LocalStorageVersion';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import IDBManager from './IDBManager';
 
 export default function CacheManager() {
     const [versionData, setVersionData] = useState<Version>();
 
     useEffect(() => {
+        //VERSION LOCAL STORAGE STUFF
         if(!versionIsCurrent()) {
             axios.get(`${process.env.REACT_APP_BASE_URL}/version`)
             .then((res) => {
@@ -38,10 +40,9 @@ export default function CacheManager() {
         let expiry = new Date();
         expiry.setDate(expiry.getDate() + 1);
 
-        // let expiry = Date.now() + 1;
         let newVersionObj = {version, expiry}
         localStorage.setItem('version', JSON.stringify(newVersionObj));
     }
 
-    return <></>;
+    return <IDBManager />;
 }
