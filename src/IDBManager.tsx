@@ -11,25 +11,25 @@ export default function IDBManager() {
     
 
     function openDB(): void {
-        let db = null;
-        let objectStore = null;
         const openRequest = indexedDB.open("weapons", 1);
 
-        openRequest.onerror = (e: any) => {
-            console.log('error', e.target.error);
+        openRequest.onerror = (e) => {
+            let target = e.target as IDBOpenDBRequest;
+            console.log('error', target.result);
         };
 
-        openRequest.onsuccess = (e: any) => {
-            db = e.target.result;
-            console.log('success', db);
-
+        openRequest.onsuccess = (e) => {
+            let target = e.target as IDBOpenDBRequest;
+            let result = target.result;
+            console.log('success', result);
         };
 
-        openRequest.onupgradeneeded = (e:any) => {
-            let result = e.target.result;
+        openRequest.onupgradeneeded = (e) => {
+            let target = e.target as IDBOpenDBRequest;
+            let result = target.result;
             console.log('upgrade needed', result)
             if(!result.objectStoreNames.contains('weapons')) {
-                objectStore = result.createObjectStore('weapons', {
+                result.createObjectStore('weapons', {
                     keyPath: 'uuid'
                 });
             }
