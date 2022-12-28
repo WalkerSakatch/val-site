@@ -1,3 +1,4 @@
+import { devNull } from 'os';
 import React, { useEffect } from 'react'
 
 export default function IDBManager() {
@@ -19,11 +20,19 @@ export default function IDBManager() {
         };
 
         openRequest.onsuccess = (e: any) => {
-            console.log('sucess', e.target.result);
+            db = e.target.result;
+            console.log('success', db);
+
         };
 
-        openRequest.onupgradeneeded = (e: any) => {
-            console.log('upgrade needed', e.target.result)
+        openRequest.onupgradeneeded = (e:any) => {
+            let result = e.target.result;
+            console.log('upgrade needed', result)
+            if(!result.objectStoreNames.contains('weapons')) {
+                objectStore = result.createObjectStore('weapons', {
+                    keyPath: 'uuid'
+                });
+            }
         };
 
     }
