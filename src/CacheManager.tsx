@@ -6,10 +6,11 @@ import IDBManager from './IDBManager';
 
 export default function CacheManager() {
     const [versionData, setVersionData] = useState<Version>();
+    let upToDate = versionIsCurrent();
 
     useEffect(() => {
         //VERSION LOCAL STORAGE STUFF
-        if(!versionIsCurrent()) {
+        if(!upToDate) {
             axios.get(`${process.env.REACT_APP_BASE_URL}/version`)
             .then((res) => {
                 if (res.status === 200) {
@@ -44,5 +45,5 @@ export default function CacheManager() {
         localStorage.setItem('version', JSON.stringify(newVersionObj));
     }
 
-    return <IDBManager />;
+    return <IDBManager versionWasUpdated={!upToDate}/>;
 }

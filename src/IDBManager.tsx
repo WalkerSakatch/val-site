@@ -1,17 +1,22 @@
 import { getWeapons } from '@mrbabalafe/valorant-api-helper';
 import React, { useEffect, useState } from 'react'
 
-export default function IDBManager() {
+export default function IDBManager({versionWasUpdated}: any) {
   
     const [database, setDatabase] = useState<IDBDatabase>();
 
     useEffect(() => {
+        console.log('was version updated? ', versionWasUpdated)
         openDB();
     }, []);
 
     useEffect(() => {
+        //! Issue: If IDB is deleted and Local Storage is not, weapons will not be saved in IDB
+        //! Workaround: Delete Local Storage from Developer Tools -> Application -> Local Storage
         if(database !== undefined) {
-            storeWeaponData();
+            if(versionWasUpdated) {
+                storeWeaponData();
+            }
         }
     }, [database]);
     
@@ -45,12 +50,7 @@ export default function IDBManager() {
 
     }
 
-    //! Adding weapons to IDB works, however currently on page reload, if the idb exists the transaction and request onerror methods
-    //! are triggered because this function is trying to add items with duplicate uuids (the weapon is already in IDB)
-    //! I think that this should be resolved by checking in CacheManager if the version was updated, and if it was
-    //! In this IDBManager I should clear the IDB and then call this function.
     async function storeWeaponData() {
-
         let weapons = (await getWeapons()).data
         console.log(weapons)
 
@@ -70,7 +70,7 @@ export default function IDBManager() {
         console.log('store', store);
 
         weapons.forEach(weapon => {
-            let request = store.add(weapon);
+            let request = store.put(weapon);
 
             request.onerror = (e) => {
                 console.log('Error adding weapon to objectStore: ', e);
@@ -80,6 +80,10 @@ export default function IDBManager() {
                 console.log('Added weapon to objectStore: ', weapon)
             }
         });
+    }
+
+    function clearIDB(): void {
+
     }
 
     return (
