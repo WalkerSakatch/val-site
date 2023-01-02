@@ -1,17 +1,12 @@
 import React from 'react'
 import { useEffect } from 'react';
-import {Skin, Chroma} from "@mrbabalafe/valorant-api-helper"
+import { Skin } from "@mrbabalafe/valorant-api-helper"
 
 export default function SkinDisplay(skin: Skin) {
 
-    // useEffect(() => {
-        // console.log("skin.chromas: ", skin.chromas);
-    // }, [skin.chromas])
-// 
-
     useEffect(() => {
         getDisplayIcon(skin)
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     function getDisplayIcon(skin: Skin): string {
         return skin.chromas[0].fullRender;

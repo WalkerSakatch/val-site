@@ -7,7 +7,7 @@ export class IDB extends Dexie {
 
     constructor() {
         super('bmbl-db');
-        //? Version gets multiplied by 10 for some reason, so this is actually v1
+        //Version gets multiplied by 10 for some reason, so this is actually v1
         this.version(0.1).stores({
             'weapons': 'uuid, displayName, category, defaultSkinUuid, displayIcon, killStreamIcon, assetPath, weaponStats, shopData, skins'
         });
@@ -17,7 +17,7 @@ export class IDB extends Dexie {
     //? This is just to test adding data with dexie
     async populateWeapons() {
         let weapons = (await getWeapons()).data
-        //? If Cannot bulk put to db, try putting one at a time.
+        //If Cannot bulk put to db, try putting one at a time.
         try {
             this.weapons.bulkPut(weapons);
             console.log("Added to weapon db", weapons)
@@ -33,8 +33,6 @@ export class IDB extends Dexie {
             })
         }
     }
-
-
 }
 
 export const db = new IDB();
