@@ -2,7 +2,8 @@ import { Version, WeaponResponse } from '@mrbabalafe/valorant-api-helper';
 import { LocalStorageVersion } from './LocalStorageVersion';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import IDBManager from './IDBManager';
+// import IDBManager from './IDBManager';
+import { db } from './cache/IDB';
 
 export default function CacheManager() {
     const [versionData, setVersionData] = useState<Version>();
@@ -16,6 +17,7 @@ export default function CacheManager() {
                 if (res.status === 200) {
                     setVersionData(res.data);
                     updateVersion(res.data);
+                    populateIDB();
                 }
             });
         }
@@ -45,5 +47,10 @@ export default function CacheManager() {
         localStorage.setItem('version', JSON.stringify(newVersionObj));
     }
 
-    return <IDBManager versionWasUpdated={!upToDate}/>;
+    function populateIDB() {
+        db.populateWeapons();
+    }
+
+    // return <IDBManager versionWasUpdated={!upToDate}/>;
+    return <></>
 }

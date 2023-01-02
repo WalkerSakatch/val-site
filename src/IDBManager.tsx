@@ -1,4 +1,4 @@
-import { getWeapons } from '@mrbabalafe/valorant-api-helper';
+import { getWeapons, Weapon } from '@mrbabalafe/valorant-api-helper';
 import React, { useEffect, useState } from 'react'
 
 export default function IDBManager({versionWasUpdated}: any) {
