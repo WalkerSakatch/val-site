@@ -1,6 +1,6 @@
 import './App.css';
-import CacheManager from './CacheManager';
-import WeaponsSection from './WeaponsSection';
+import CacheManager from './cache/CacheManager';
+import WeaponsSection from './components/WeaponsSection';
 
 function App() {
   return (

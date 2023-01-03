@@ -1,7 +1,7 @@
 import Dexie, { Table } from "dexie";
 import { getWeapons, Weapon } from "@mrbabalafe/valorant-api-helper";
 
-export class IDB extends Dexie {
+export class IDBManager extends Dexie {
 
     weapons!: Table<Weapon>;
 
@@ -12,9 +12,7 @@ export class IDB extends Dexie {
             'weapons': 'uuid, displayName, category, defaultSkinUuid, displayIcon, killStreamIcon, assetPath, weaponStats, shopData, skins'
         });
     }
-
-    //? This function will be removed later.
-    //? This is just to test adding data with dexie
+    
     async populateWeapons() {
         let weapons = (await getWeapons()).data
         //If Cannot bulk put to db, try putting one at a time.
@@ -35,4 +33,4 @@ export class IDB extends Dexie {
     }
 }
 
-export const db = new IDB();
+export const db = new IDBManager();

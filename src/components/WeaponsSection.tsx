@@ -1,8 +1,8 @@
-import React from 'react'
-import { Weapon } from "@mrbabalafe/valorant-api-helper"
-import WeaponDisplay from './WeaponDisplay'
-import { db } from './cache/IDB'
-import { useLiveQuery } from 'dexie-react-hooks'
+import React from 'react';
+import { Weapon } from "@mrbabalafe/valorant-api-helper";
+import WeaponDisplay from './WeaponDisplay';
+import { db } from '../cache/IDBManager';
+import { useLiveQuery } from 'dexie-react-hooks';
 
 export default function WeaponsSection() {
 

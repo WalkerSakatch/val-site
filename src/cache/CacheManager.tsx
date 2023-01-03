@@ -1,9 +1,12 @@
 import { Version } from '@mrbabalafe/valorant-api-helper';
-import { LocalStorageVersion } from './LocalStorageVersion';
+import { LocalStorageVersion } from './definitions/LocalStorageVersion';
 import axios from 'axios';
 import React, { useEffect } from 'react';
-import { db } from './cache/IDB';
+import { db } from './IDBManager';
 
+
+//! Right now if IDB is deleted, but Local Storage is not, site will not display anything
+//! Workaround currently is to delete Local Storage to force update everything.
 export default function CacheManager() {
     let upToDate = versionIsCurrent();
 

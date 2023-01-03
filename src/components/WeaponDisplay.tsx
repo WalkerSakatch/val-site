@@ -1,6 +1,6 @@
-import React from 'react'
-import {Skin, Weapon} from "@mrbabalafe/valorant-api-helper"
-import SkinDisplay from './SkinDisplay'
+import React from 'react';
+import {Skin, Weapon} from "@mrbabalafe/valorant-api-helper";
+import SkinDisplay from './SkinDisplay';
 
 export default function WeaponDisplay(weapon: Weapon) {
   return (
