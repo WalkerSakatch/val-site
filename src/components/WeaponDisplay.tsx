@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {Skin, Weapon} from "@mrbabalafe/valorant-api-helper";
 import SkinDisplay from './SkinDisplay';
 
@@ -19,7 +20,7 @@ export default function WeaponDisplay(weapon: Weapon) {
     return (
       <div>
           <h1>{weapon.displayName}</h1>
-              <SkinDisplay {...defaultSkin}/>
+          <SkinDisplay {...defaultSkin}/>
       </div>
     )
 }

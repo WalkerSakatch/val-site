@@ -3,6 +3,7 @@ import { Weapon } from "@mrbabalafe/valorant-api-helper";
 import WeaponDisplay from './WeaponDisplay';
 import { db } from '../cache/IDBManager';
 import { useLiveQuery } from 'dexie-react-hooks';
+import { Link } from 'react-router-dom';
 
 export default function WeaponsSection() {
 
@@ -12,10 +13,11 @@ export default function WeaponsSection() {
     });
 
     return (
-    
         <div>
             {weaponData?.map((weapon: Weapon) => (
-                <WeaponDisplay {...weapon} />
+                <Link to={`/valorant/weapons/${weapon.uuid}`}>
+                    <WeaponDisplay {...weapon} key={weapon.uuid} />
+                </Link>
             ))}
         </div>
     )
