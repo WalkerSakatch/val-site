@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import {Skin, Weapon} from "@mrbabalafe/valorant-api-helper";
 import SkinDisplay from './SkinDisplay';
+import SimpleSkinDisplay from './SimpleSkinDisplay';
 
 export default function WeaponDisplay(weapon: Weapon) {
     let defaultSkinUUID = weapon.defaultSkinUuid;
@@ -20,7 +21,7 @@ export default function WeaponDisplay(weapon: Weapon) {
     return (
       <div>
           <h1>{weapon.displayName}</h1>
-          <SkinDisplay {...defaultSkin}/>
+          <SimpleSkinDisplay {...defaultSkin}/>
       </div>
     )
 }
