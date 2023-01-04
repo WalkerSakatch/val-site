@@ -13,7 +13,7 @@ export default function WeaponDetails() {
         return db.weapons.where('uuid').equalsIgnoreCase(weaponId!).toArray();
     });
 
-    console.log(weaponData)
+    // console.log(weaponData)
 
     return (
         <div>

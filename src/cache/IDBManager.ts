@@ -18,13 +18,13 @@ export class IDBManager extends Dexie {
         //If Cannot bulk put to db, try putting one at a time.
         try {
             this.weapons.bulkPut(weapons);
-            console.log("Added to weapon db", weapons)
+            // console.log("Added to weapon db", weapons)
         } catch {
             console.log("Could not add to weapon db", weapons)
             weapons.forEach(weapon => {
                 try {
                     this.weapons.put(weapon)
-                    console.log("Added to weapon db", weapon);
+                    // console.log("Added to weapon db", weapon);
                 } catch {
                     console.log("Could not add to weapon db", weapon);
                 }
