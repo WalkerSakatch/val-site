@@ -20,8 +20,9 @@ export default function WeaponDisplay(weapon: Weapon) {
 
     return (
       <div>
+          <h1>WEAPON DISPLAY</h1>
           <h1>{weapon.displayName}</h1>
-          <SimpleSkinDisplay {...defaultSkin}/>
+          <SimpleSkinDisplay {...defaultSkin} />
       </div>
     )
 }

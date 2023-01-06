@@ -24,7 +24,7 @@ export default function SkinDisplay(skin: Skin) {
             <h5>{level.displayName}</h5>
             <h5>{level.levelItem}</h5>
             <h5>{level.streamedVideo}</h5> */}
-            <video autoPlay={true} controls={true}>
+            <video controls={true}>
               <source src={level.streamedVideo}/>  
             </video>
             {/* <h5>{level.uuid}</h5> */}
