@@ -7,6 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #e3e3e3;
   background-color: #2f3742;
+  overflow-x: hidden;
 }
 
 a {
@@ -41,7 +42,12 @@ a {
     inset: 0 50% 0 0;
     flex-direction: column;
     padding: 5rem 1em;
-    background: rgba(0, 0, 0, 0.85)
+    background: rgba(0, 0, 0, 0.85);
+    transform: translateX(-100%);
+  }
+
+  .primary-navigation[data-visible="true"] {
+    transform: translateX(0%);
   }
 
   .mobile-nav-toggle {
