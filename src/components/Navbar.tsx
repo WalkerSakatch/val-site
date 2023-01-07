@@ -22,17 +22,14 @@ export default function Navbar() {
     }
 
     return (
-        <>
         <header>
             <button className='mobile-nav-toggle' aria-controls='primary-navigation' aria-expanded={false} onClick={toggleMenu}>
                 { visible 
                 ? <FontAwesomeIcon icon={faXmark} size={'2xl'}/> 
                 : <FontAwesomeIcon icon={faBars} size={'2xl'}/>}
             </button>
-            
-            {/* {//! CONSIDER PUTTING THE UL, LI STUFF INTO IT'S OWN COMPONENT TO CLEAN THIS UP} */}
             <nav>
-                <ul id='primary-navigation' className='primary-navigation flex' data-visible="true">
+                <ul id='primary-navigation' className='primary-navigation flex' data-visible="false">
                     <li>
                         <Link to="/valorant" onClick={toggleMenu}>Home</Link>
                     </li>
@@ -45,7 +42,5 @@ export default function Navbar() {
                 </ul>
             </nav>
         </header>
-        </>
-        
     )
 }
