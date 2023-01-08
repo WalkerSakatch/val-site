@@ -1,0 +1,30 @@
+main {
+    padding: 10em;
+}
+
+.weapons-page-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    /* background-color: red; */
+}
+
+.weapon-display {
+    padding: 0;
+    background-color: #104941;
+    border: 1px #16E5B4 solid;
+    /* padding-bottom: 1em; */
+}
+
+.weapon-display .weapon-display-name{
+    margin: 0;
+}
+
+.weapon-display img {
+    height: 5rem;
+    margin-bottom: 0.5em;
+}
+
+.skin-display-name {
+    margin: 0.5em 0 0.5em 0;
+}
