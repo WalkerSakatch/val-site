@@ -14,9 +14,9 @@ export default function SimpleSkinDisplay(skin: Skin) {
     }
 
   return (
-    <div>
+    <>
         <h3 className='skin-display-name'>{skin.displayName}</h3>
         <img src={getDisplayIcon(skin)} alt={skin.displayName}></img>
-    </div>
+    </>
   )
 }

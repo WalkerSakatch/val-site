@@ -1,22 +1,24 @@
 main {
-    padding: 10em;
+    padding: 5em;
 }
 
 .weapons-page-grid {
     display: grid;
     gap: 1.5rem;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    /* background-color: red; */
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .weapon-display {
     padding: 0;
     background-color: #104941;
     border: 1px #16E5B4 solid;
-    /* padding-bottom: 1em; */
 }
 
-.weapon-display .weapon-display-name{
+.weapon-display:hover {
+    background-color: #177266;
+}
+
+.weapon-display .weapon-display-name {
     margin: 0;
 }
 
@@ -27,4 +29,19 @@ main {
 
 .skin-display-name {
     margin: 0.5em 0 0.5em 0;
+}
+
+@media (max-width: 35em) {
+    main {
+        padding: 5em 1.5em 0 1.5em;
+    }
+
+    .weapons-page-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .weapon-display img {
+        height: 5rem;
+        margin-bottom: 0.5em;
+    }
 }

@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 import { db } from '../cache/IDBManager';
 import SimpleSkinDisplay from './SimpleSkinDisplay';
 import SkinDisplay from './SkinDisplay';
+import '../styles/WeaponsPage.css';
 
 export default function WeaponDetails() {
 
@@ -15,17 +16,20 @@ export default function WeaponDetails() {
     });
 
     return (
-        <div>
-            <h1>WEAPON DETAILS</h1>
+        <main>
+            <div className="weapons-page-grid">
             {
-                weaponData?.map((weapon: Weapon) => (
-                    weapon.skins.map((skin: Skin) => (
+            weaponData?.map((weapon: Weapon) => (
+                weapon.skins.map((skin: Skin) => (
+                    <div className='weapon-display'>
                         <Link to={`/valorant/weapons/${weapon.uuid}/skin/${skin.uuid}`}>
                             <SimpleSkinDisplay {...skin}/>
                         </Link>
-                    ))
+                    </div>
                 ))
+            ))
             }
-        </div>
+            </div>
+        </main>
     )
 }
