@@ -14,7 +14,6 @@ export default function WeaponsPage() {
     });
 
     return (
-        <main>
             <div className="weapons-page-grid">
                 {weaponData?.map((weapon: Weapon) => (
                     <Link to={`/valorant/weapons/${weapon.uuid}`}>
@@ -22,6 +21,5 @@ export default function WeaponsPage() {
                     </Link>
                 ))}
             </div>
-        </main>
     )
 }

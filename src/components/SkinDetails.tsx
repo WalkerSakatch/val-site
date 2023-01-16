@@ -37,12 +37,12 @@ export default function SkinDetails() {
     
 
     return (
-        <main>
+        <>
             {/* <h1>SKIN DETAILS</h1> */}
             {loading
                 ? <h3>Loading...</h3>
                 : <SkinDisplay {...skin!}/>
             }
-        </main>
+        </>
     )
 }

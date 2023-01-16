@@ -1,6 +1,6 @@
-main {
+/* main {
     padding: 5em;
-}
+} */
 
 .skins-page-grid {
     display: grid;
@@ -23,9 +23,6 @@ main {
 }
 
 @media (max-width: 35em) {
-    main {
-        padding: 5em 1.5em 0 1.5em;
-    }
 
     .skins-page-grid {
         grid-template-columns: 1fr;

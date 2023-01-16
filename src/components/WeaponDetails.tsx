@@ -16,7 +16,6 @@ export default function WeaponDetails() {
     });
 
     return (
-        <main>
             <div className="weapons-page-grid">
             {
             weaponData?.map((weapon: Weapon) => (
@@ -30,6 +29,5 @@ export default function WeaponDetails() {
             ))
             }
             </div>
-        </main>
     )
 }

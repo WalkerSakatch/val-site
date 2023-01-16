@@ -13,18 +13,20 @@ function App() {
     <div className="App">
       <CacheManager />
       <Navbar />
-      <Routes>
-        {/* HOME */}
-        <Route path='/valorant' element={<HomePage />} />
+      <main>
+        <Routes>
+          {/* HOME */}
+          <Route path='/valorant' element={<HomePage />} />
 
-        {/* WEAPONS */}
-        <Route path='/valorant/weapons' element={<WeaponsPage />} />
-        <Route path='/valorant/weapons/:weaponId' element={<WeaponDetails />}/>
-        <Route path='/valorant/weapons/:weaponId/skin/:skinId' element={<SkinDetails />}/>
+          {/* WEAPONS */}
+          <Route path='/valorant/weapons' element={<WeaponsPage />} />
+          <Route path='/valorant/weapons/:weaponId' element={<WeaponDetails />}/>
+          <Route path='/valorant/weapons/:weaponId/skin/:skinId' element={<SkinDetails />}/>
 
-        {/* MAPS */}
-        <Route path='/valorant/maps' element={<MapsPage />} />
-      </Routes>
+          {/* MAPS */}
+          <Route path='/valorant/maps' element={<MapsPage />} />
+        </Routes>
+      </main>
     </div>
   );
 }
