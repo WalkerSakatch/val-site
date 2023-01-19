@@ -5,13 +5,27 @@
 .skins-page-grid {
     display: grid;
     gap: 1.5rem;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
 }
 
 .skin-display {
     padding: 0;
     background-color: #104941;
     border: 1px #16E5B4 solid;
+}
+
+.chroma-selector {
+    background-color: #555555;
+}
+
+.chroma-selector img {
+    height: 8rem;
+    margin: 0;
+    padding: 0;
+}
+
+.skin-display img {
+    height: 10rem;
 }
 
 .video-display {
