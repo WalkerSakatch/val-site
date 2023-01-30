@@ -15,21 +15,25 @@
 }
 
 .chroma-selector {
-    background-color: #555555;
+    text-align: start;
 }
 
 .chroma-selector img {
-    height: 8rem;
-    margin: 0;
+    height: 5em;
+    margin: 1em 0.5em 0 0;
     padding: 0;
 }
 
 .skin-display img {
-    height: 10rem;
+    height: 7rem;
 }
 
 .video-display {
     padding: 0;
+}
+
+.video-display video {
+    width: 100%;
 }
 
 .skin-display .skin-display-name {
@@ -45,6 +49,16 @@
     .skin-display img {
         height: 5rem;
         margin-bottom: 0.5em;
+    }
+
+    .chroma-selector {
+        text-align: center;
+    }
+
+    .chroma-selector img {
+        height: 3rem;
+        margin: 0 0.5em 0 0;
+        padding: 0;
     }
 
     .video-display video {

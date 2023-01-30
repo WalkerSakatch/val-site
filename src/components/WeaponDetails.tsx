@@ -20,11 +20,13 @@ export default function WeaponDetails() {
             {
             weaponData?.map((weapon: Weapon) => (
                 weapon.skins.map((skin: Skin) => (
+                <Link to={`/valorant/weapons/${weapon.uuid}/skin/${skin.uuid}`}>
                     <div className='weapon-display'>
-                        <Link to={`/valorant/weapons/${weapon.uuid}/skin/${skin.uuid}`}>
+                        
                             <SimpleSkinDisplay {...skin}/>
-                        </Link>
+                        
                     </div>
+                </Link>
                 ))
             ))
             }
