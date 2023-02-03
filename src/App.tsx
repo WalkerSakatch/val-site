@@ -7,6 +7,7 @@ import SkinDetails from './components/SkinDetails';
 import HomePage from './pages/HomePage';
 import Navbar from './components/Navbar';
 import MapsPage from './pages/MapsPage';
+import MapDetails from './components/MapDetails';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
 
           {/* MAPS */}
           <Route path='/valorant/maps' element={<MapsPage />} />
+          <Route path='/valorant/maps/:mapId' element={<MapDetails />}/>
         </Routes>
       </main>
     </div>

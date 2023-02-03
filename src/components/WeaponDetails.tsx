@@ -9,7 +9,7 @@ import '../styles/WeaponsPage.css';
 
 export default function WeaponDetails() {
 
-    const {weaponId} = useParams()
+    const {weaponId} = useParams();
     
     const weaponData = useLiveQuery(() => {
         return db.weapons.where('uuid').equalsIgnoreCase(weaponId!).toArray();
@@ -22,9 +22,7 @@ export default function WeaponDetails() {
                 weapon.skins.map((skin: Skin) => (
                 <Link to={`/valorant/weapons/${weapon.uuid}/skin/${skin.uuid}`}>
                     <div className='weapon-display'>
-                        
-                            <SimpleSkinDisplay {...skin}/>
-                        
+                        <SimpleSkinDisplay {...skin}/>
                     </div>
                 </Link>
                 ))

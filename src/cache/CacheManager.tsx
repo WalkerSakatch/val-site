@@ -49,6 +49,7 @@ export default function CacheManager() {
 
     function populateIDB() {
         db.populateWeapons();
+        db.populateMaps();
     }
     
     return <></>
