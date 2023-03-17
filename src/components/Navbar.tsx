@@ -39,6 +39,9 @@ export default function Navbar() {
                     <li>
                         <Link to="/valorant/maps" onClick={toggleMenu}>Maps</Link>
                     </li>
+                    <li>
+                        <Link to="/valorant/login" onClick={toggleMenu}>Login</Link>
+                    </li>
                 </ul>
             </nav>
         </header>
