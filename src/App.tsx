@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import MapsPage from './pages/MapsPage';
 import MapDetails from './components/MapDetails';
 import LoginPage from './pages/LoginPage';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
 
           {/* LOGIN */}
           <Route path='/valorant/login' element={<LoginPage />}/>
+          <Route path='/valorant/profile' element={<ProfilePage />}/>
 
           {/* WEAPONS */}
           <Route path='/valorant/weapons' element={<WeaponsPage />} />

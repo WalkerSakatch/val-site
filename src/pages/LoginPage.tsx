@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { AuthorizationResponse } from '@mrbabalafe/valorant-api-helper/build/api/auth/definitions/AuthorizationResponse';
-import { getTokenResponseFromUri, RegionToShard } from '@mrbabalafe/valorant-api-helper';
+import { getTokenResponseFromUri, regionToShard } from '@mrbabalafe/valorant-api-helper';
 import { AccessTokenResponse } from '@mrbabalafe/valorant-api-helper/build/api/auth/definitions/AccessTokenResponse';
 import { RegionResponse } from '@mrbabalafe/valorant-api-helper/build/api/auth/definitions/RegionResponse';
 
@@ -10,7 +10,6 @@ export default function HomePage() {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [riotCode, setRiotCode] = useState('');
 
     async function handleLogin() {
 
@@ -86,7 +85,7 @@ export default function HomePage() {
                 return res.data;
             });
 
-        const shard = RegionToShard(regionResponse.data.affinities.live);
+        const shard = regionToShard(regionResponse.data.affinities.live);
         sessionStorage.setItem('shard', shard);
     }
 

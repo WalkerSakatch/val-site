@@ -42,6 +42,9 @@ export default function Navbar() {
                     <li>
                         <Link to="/valorant/login" onClick={toggleMenu}>Login</Link>
                     </li>
+                    <li>
+                        <Link to="/valorant/profile" onClick={toggleMenu}>Profile</Link>
+                    </li>
                 </ul>
             </nav>
         </header>
