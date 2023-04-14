@@ -13,6 +13,14 @@ export default function HomePage() {
     const [riotCode, setRiotCode] = useState('');
 
     async function handleLogin() {
+
+        await storeTokenInfo();
+        await storeEntitlementsToken();
+        await storeShard();      
+
+    }
+
+    async function storeTokenInfo() {
         const lsVersion = JSON.parse(localStorage.getItem("version")!);
         const riotClientBuild = lsVersion.version.riotClientBuild;
         const loginBody = { riotClientBuild, username, password }
@@ -50,10 +58,9 @@ export default function HomePage() {
             const tokenInfo = getTokenResponseFromUri(loginResponse.data.response.parameters.uri);
             sessionStorage.setItem('tokenInfo', JSON.stringify(tokenInfo));
         }
+    }
 
-
-
-        
+    async function storeEntitlementsToken() {
         let tokenInfo: AccessTokenResponse = JSON.parse(sessionStorage.getItem("tokenInfo")!);
         let access_token = tokenInfo.access_token;
         let id_token = tokenInfo.id_token;
@@ -64,19 +71,22 @@ export default function HomePage() {
             });
         
         sessionStorage.setItem('entitlements_token', entitlementsResponse.data.entitlements_token);
+    }
 
-
-        //! THIS IS ALL REGION STUFF BELOW. PROBABLY PUT INTO IT'S OWN FUNCTION
-        let regionBody = {
+    async function storeShard() {
+        const tokenInfo = JSON.parse(sessionStorage.getItem('tokenInfo')!);
+        const access_token = tokenInfo.access_token;
+        const id_token = tokenInfo.id_token;
+        const regionBody = {
             access_token,
             id_token
         }
-        let regionResponse: RegionResponse = await axios.put(`${process.env.REACT_APP_BASE_URL}/auth/region`, regionBody)
+        const regionResponse: RegionResponse = await axios.put(`${process.env.REACT_APP_BASE_URL}/auth/region`, regionBody)
             .then(res => {
                 return res.data;
             });
 
-        let shard = RegionToShard(regionResponse.data.affinities.live);
+        const shard = RegionToShard(regionResponse.data.affinities.live);
         sessionStorage.setItem('shard', shard);
     }
 
