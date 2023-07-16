@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import { db } from '../cache/IDBManager';
 import SimpleSkinDisplay from './SimpleSkinDisplay';
 import SkinDisplay from './SkinDisplay';
+import Helmet from 'react-helmet';
 
 export default function SkinDetails() {
 
@@ -38,6 +39,9 @@ export default function SkinDetails() {
 
     return (
         <>
+            <Helmet>
+                <meta property="og:description" content={skin?.displayName} />
+            </Helmet>
             {/* <h1>SKIN DETAILS</h1> */}
             {loading
                 ? <h3>Loading...</h3>
