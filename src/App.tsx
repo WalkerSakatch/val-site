@@ -10,6 +10,8 @@ import MapsPage from './pages/MapsPage';
 import MapDetails from './components/MapDetails';
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
+import AgentsPage from './pages/AgentsPage';
+import AgentDetails from './components/AgentDetails';
 
 function App() {
   return (
@@ -33,6 +35,9 @@ function App() {
           {/* MAPS */}
           <Route path='/valorant/maps' element={<MapsPage />} />
           <Route path='/valorant/maps/:mapId' element={<MapDetails />}/>
+
+          <Route path='/valorant/agents/' element={<AgentsPage />} />
+          <Route path='/valorant/agents/:agentId' element={<AgentDetails />} />
         </Routes>
       </main>
     </div>
