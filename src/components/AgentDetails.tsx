@@ -3,6 +3,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../cache/IDBManager";
+import AbilityDetails from "./AbilityDetails";
 import "../styles/AgentsPage.css";
 
 export default function AgentDetails() {
@@ -21,21 +22,23 @@ export default function AgentDetails() {
 						{agent.role.displayName}
 					</h1>
 					<h2>{agent.description}</h2>
-					<img
-						src={agent.fullPortraitV2}
-						alt={agent.displayName}
-					></img>
-					{/* <h2>{agent.abilities[0].displayName}</h2> */}
-					{agent.abilities.map((ability: Ability) => (
-						<>
-							<h1>{ability.displayName}</h1>
+
+					<div style={{ display: "flex", flexDirection: "row" }}>
+						<div className="agent-details-img">
 							<img
-								src={ability.displayIcon}
-								alt={ability.displayName}
+								src={agent.fullPortraitV2}
+								alt={agent.displayName}
 							></img>
-							<h3>{ability.description}</h3>
-						</>
-					))}
+						</div>
+
+						<div className="ability-display-box">
+							{agent.abilities.map((ability: Ability) => (
+								<AbilityDetails
+									ability={ability}
+								></AbilityDetails>
+							))}
+						</div>
+					</div>
 				</>
 			))}
 		</>
