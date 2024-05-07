@@ -1,43 +1,53 @@
 .agents-page-grid {
-    display: grid;
-    gap: 1.5rem;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	display: grid;
+	gap: 1.5rem;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
 .agent-display {
-    padding: 0;
-    background-color: #104941;
-    border: 1px #16E5B4 solid;
+	padding: 0;
+	background-color: #104941;
+	border: 1px #16e5b4 solid;
 }
 
 .agent-display:hover {
-    background-color: #177266;
+	background-color: #177266;
 }
 
 .agent-display .agent-display-name {
-    margin: 0 0 0.25em 0;
+	margin: 0 0 0.25em 0;
 }
 
 .agent-display img {
-    height: 5rem;
-    margin-bottom: 0.5em;
+	height: 5rem;
+	margin-bottom: 0.5em;
 }
 
 .skin-display-name {
-    margin: 0.5em 0 0.5em 0;
+	margin: 0.5em 0 0.5em 0;
+}
+
+.ability-display-box {
+	display: flex;
+	flex-direction: row;
+}
+
+.agent-details-img img {
+	height: 100%;
+	width: 100%;
 }
 
 @media (max-width: 35em) {
-    main {
-        padding: 5em 1.5em 0 1.5em;
-    }
+	main {
+		padding: 5em 1.5em 0 1.5em;
+	}
 
-    .agents-page-grid {
-        grid-template-columns: 1fr;
-    }
+	.agents-page-grid {
+		grid-template-columns: 1fr;
+	}
 
-    .agent-display img {
-        height: 4rem;
-        margin-bottom: 0.5em;
-    }
+	.agent-display img {
+		height: 4rem;
+		margin-bottom: 0.5em;
+	}
 }

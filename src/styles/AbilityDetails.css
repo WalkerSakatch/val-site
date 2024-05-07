@@ -1,0 +1,10 @@
+.ability_container {
+	display: flex;
+	flex-direction: column;
+	border-top: 4px solid #ff4d00;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	height: 25%;
+	width: 25%;
+	margin: 0.5em;
+}
