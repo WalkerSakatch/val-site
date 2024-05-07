@@ -7,7 +7,8 @@ import AbilityDetails from "./AbilityDetails";
 import "../styles/AgentsPage.css";
 
 export default function AgentDetails() {
-	const { agentId } = useParams();
+    
+    const {agentId} = useParams();
 
 	const agentData = useLiveQuery(() => {
 		return db.agents.where("uuid").equalsIgnoreCase(agentId!).toArray();
@@ -18,24 +19,18 @@ export default function AgentDetails() {
 			{agentData?.map((agent: Agent) => (
 				<>
 					<h1>
-						{agent.displayName} ({agent.developerName}) -{" "}
-						{agent.role.displayName}
+						{agent.displayName} ({agent.developerName}) - {agent.role.displayName}
 					</h1>
 					<h2>{agent.description}</h2>
 
 					<div style={{ display: "flex", flexDirection: "row" }}>
 						<div className="agent-details-img">
-							<img
-								src={agent.fullPortraitV2}
-								alt={agent.displayName}
-							></img>
+							<img src={agent.fullPortraitV2} alt={agent.displayName}></img>
 						</div>
 
 						<div className="ability-display-box">
 							{agent.abilities.map((ability: Ability) => (
-								<AbilityDetails
-									ability={ability}
-								></AbilityDetails>
+								<AbilityDetails ability={ability}></AbilityDetails>
 							))}
 						</div>
 					</div>
