@@ -9,7 +9,6 @@ import "../styles/AgentsPage.css";
 export default function AgentDetails() {
     
     const {agentId} = useParams();
-
 	const agentData = useLiveQuery(() => {
 		return db.agents.where("uuid").equalsIgnoreCase(agentId!).toArray();
 	});
@@ -23,16 +22,14 @@ export default function AgentDetails() {
 					</h1>
 					<h2>{agent.description}</h2>
 
-					<div style={{ display: "flex", flexDirection: "row" }}>
-						<div className="agent-details-img">
-							<img src={agent.fullPortraitV2} alt={agent.displayName}></img>
-						</div>
+					<div className="agent-details-img">
+						<img src={agent.fullPortraitV2} alt={agent.displayName}></img>
+					</div>
 
-						<div className="ability-display-box">
-							{agent.abilities.map((ability: Ability) => (
-								<AbilityDetails ability={ability}></AbilityDetails>
-							))}
-						</div>
+					<div className="ability-display-box">
+						{agent.abilities.map((ability: Ability) => (
+							<AbilityDetails ability={ability}></AbilityDetails>
+						))}
 					</div>
 				</>
 			))}
