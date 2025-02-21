@@ -1,11 +1,12 @@
 import Dexie, { Table } from "dexie";
 import { getMaps, getWeapons, getAgents, Map, Weapon, Agent } from "@mrbabalafe/valorant-api-helper";
 import { AgentWithUrlName } from "../types/AgentWithUrlName";
+import { MapWithUrlName } from "../types/MapWithUrlName";
 
 export class IDBManager extends Dexie {
 
     weapons!: Table<Weapon>;
-    maps!: Table<Map>;
+    maps!: Table<MapWithUrlName>;
     agents!: Table<AgentWithUrlName>;
 
     constructor() {
@@ -13,11 +14,11 @@ export class IDBManager extends Dexie {
         //Version gets multiplied by 10 for some reason, so this is actually v1
         this.version(0.1).stores({
             'weapons': 'uuid, displayName, category, defaultSkinUuid, displayIcon, killStreamIcon, assetPath, weaponStats, shopData, skins',
-            'maps': 'uuid, displayName, coordinates, displayIcon, listViewIcon, splash, assetPath, mapUrl, xMultiplier, yMultiplier, xScalarToAdd, yScalarToAdd, callouts',
+            'maps': 'data.uuid, data.displayName, data.coordinates, data.displayIcon, data.listViewIcon, data.splash, data.assetPath, data.mapUrl, data.xMultiplier, data.yMultiplier, data.xScalarToAdd, data.yScalarToAdd, data.callouts, urlEncodedName',
             'agents': 'data.uuid, data.displayName, data.data.description, data.developerName, data.characterTags, data.displayIcon, data.displayIconSmall, data.bustPortrait, data.fullPortrait, data.fullPortraitV2, data.killfeedPortrait, data.background, data.backgroundGradientColors, data.assetPath, data.isFullPortraitRightFacing, data.isPlayableCharacter, data.isAvailableForTest, data.isBaseContent, data.role, data.abilities, data.voiceLine, urlEncodedName'
         });
     }
-    
+
     async populateWeapons() {
         let weapons = (await getWeapons()).data;
         //If Cannot bulk put to db, try putting one at a time.
@@ -39,13 +40,14 @@ export class IDBManager extends Dexie {
 
     async populateMaps() {
         let maps = (await getMaps()).data;
+        let mapsWithUrlNames = this.makeMapWithUrlNameArray(maps);
          //If Cannot bulk put to db, try putting one at a time.
         try {
-            this.maps.bulkPut(maps);
+            this.maps.bulkPut(mapsWithUrlNames);
             // console.log("Added to map db", maps);
         } catch {
             console.log("Could not add to map db", maps);
-            maps.forEach(map => {
+            mapsWithUrlNames.forEach(map => {
                 try {
                     this.maps.put(map);
                     console.log("Added to map db", map);
@@ -88,8 +90,15 @@ export class IDBManager extends Dexie {
             let newObj: AgentWithUrlName = { data: agent, urlEncodedName : this.cleanseNameForUrl(agent.displayName)}
             return newObj;
         });
-
         return agentsWithUrlNames;
+    }
+
+    makeMapWithUrlNameArray(maps: Map[]): MapWithUrlName[] {
+        let mapsWithUrlNames = maps.map(map => {
+            let newObj: MapWithUrlName = { data: map, urlEncodedName : this.cleanseNameForUrl(map.displayName)}
+            return newObj;
+        });
+        return mapsWithUrlNames; 
     }
 }
 

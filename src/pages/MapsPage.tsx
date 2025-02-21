@@ -3,6 +3,7 @@ import { db } from '../cache/IDBManager';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Link } from 'react-router-dom';
 import { Map } from '@mrbabalafe/valorant-api-helper';
+import { MapWithUrlName } from '../types/MapWithUrlName';
 
 export default function MapsPage() {
 
@@ -14,9 +15,9 @@ export default function MapsPage() {
         <div>
             <h1>Maps</h1>
             <div className='maps-page-grid'>
-                {mapData?.map((map: Map) => (
-                    <Link to={`/valorant/maps/${map.uuid}`}>
-                        <img src={map.listViewIcon} alt={map.displayName}></img>
+                {mapData?.map((map: MapWithUrlName) => (
+                    <Link to={`/valorant/maps/${map.urlEncodedName}`}>
+                        <img src={map.data.listViewIcon} alt={map.data.displayName}></img>
                     </Link>
                 ))}
             </div>
