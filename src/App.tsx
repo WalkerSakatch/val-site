@@ -34,10 +34,10 @@ function App() {
 
           {/* MAPS */}
           <Route path='/valorant/maps' element={<MapsPage />} />
-          <Route path='/valorant/maps/:mapId' element={<MapDetails />}/>
+          <Route path='/valorant/maps/:mapName' element={<MapDetails />}/>
 
           <Route path='/valorant/agents/' element={<AgentsPage />} />
-          <Route path='/valorant/agents/:agentId' element={<AgentDetails />} />
+          <Route path='/valorant/agents/:agentName' element={<AgentDetails />} />
         </Routes>
       </main>
     </div>

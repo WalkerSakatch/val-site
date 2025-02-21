@@ -1,11 +1,12 @@
 import Dexie, { Table } from "dexie";
 import { getMaps, getWeapons, getAgents, Map, Weapon, Agent } from "@mrbabalafe/valorant-api-helper";
+import { AgentWithUrlName } from "../types/AgentWithUrlName";
 
 export class IDBManager extends Dexie {
 
     weapons!: Table<Weapon>;
     maps!: Table<Map>;
-    agents!: Table<Agent>;
+    agents!: Table<AgentWithUrlName>;
 
     constructor() {
         super('bmbl-db');
@@ -13,7 +14,7 @@ export class IDBManager extends Dexie {
         this.version(0.1).stores({
             'weapons': 'uuid, displayName, category, defaultSkinUuid, displayIcon, killStreamIcon, assetPath, weaponStats, shopData, skins',
             'maps': 'uuid, displayName, coordinates, displayIcon, listViewIcon, splash, assetPath, mapUrl, xMultiplier, yMultiplier, xScalarToAdd, yScalarToAdd, callouts',
-            'agents': 'uuid, displayName, description, developerName, characterTags, displayIcon, displayIconSmall, bustPortrait, fullPortrait, fullPortraitV2, killfeedPortrait, background, backgroundGradientColors, assetPath, isFullPortraitRightFacing, isPlayableCharacter, isAvailableForTest, isBaseContent, role, abilities, voiceLine'
+            'agents': 'data.uuid, data.displayName, data.data.description, data.developerName, data.characterTags, data.displayIcon, data.displayIconSmall, data.bustPortrait, data.fullPortrait, data.fullPortraitV2, data.killfeedPortrait, data.background, data.backgroundGradientColors, data.assetPath, data.isFullPortraitRightFacing, data.isPlayableCharacter, data.isAvailableForTest, data.isBaseContent, data.role, data.abilities, data.voiceLine, urlEncodedName'
         });
     }
     
@@ -57,14 +58,16 @@ export class IDBManager extends Dexie {
 
     async populateAgents() {
         let agents = (await getAgents()).data;
-        console.log("agents", agents)
+        let agentsWithUrlNames = this.makeAgentWithUrlNameArray(agents);
+        // console.log("agents", agents)
+        // console.log("new agents", agentsWithUrlNames)
          //If Cannot bulk put to db, try putting one at a time.
         try {
-            this.agents.bulkPut(agents);
-            console.log("Added to agent db", agents);
+            this.agents.bulkPut(agentsWithUrlNames);
+            // console.log("Added to agent db", agents);
         } catch {
             console.log("Could not add to agent db", agents);
-            agents.forEach(agent => {
+            agentsWithUrlNames.forEach(agent => {
                 try {
                     this.agents.put(agent);
                     console.log("Added to agent db", agent);
@@ -74,6 +77,19 @@ export class IDBManager extends Dexie {
                 }
             });
         }
+    }
+
+    cleanseNameForUrl(name: string): string {
+        return name.replace(/[\/<>\?'":]/g, '').replace(/\s+/g, '-').toLowerCase();
+    }
+
+    makeAgentWithUrlNameArray(agents: Agent[]): AgentWithUrlName[] {
+        let agentsWithUrlNames = agents.map(agent => {
+            let newObj: AgentWithUrlName = { data: agent, urlEncodedName : this.cleanseNameForUrl(agent.displayName)}
+            return newObj;
+        });
+
+        return agentsWithUrlNames;
     }
 }
 
