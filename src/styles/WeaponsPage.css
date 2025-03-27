@@ -4,6 +4,11 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
+.weapon-grid-column {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
 .weapon-display {
     padding: 0;
     background-color: #104941;
