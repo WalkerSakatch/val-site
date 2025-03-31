@@ -6,21 +6,22 @@ import { db } from '../cache/IDBManager';
 import SimpleSkinDisplay from './SimpleSkinDisplay';
 import SkinDisplay from './SkinDisplay';
 import '../styles/WeaponsPage.css';
+import { WeaponWithUrlName } from '../types/WeaponWithUrlName';
 
 export default function WeaponDetails() {
 
-    const {weaponId} = useParams();
+    const {weaponName} = useParams();
     
     const weaponData = useLiveQuery(() => {
-        return db.weapons.where('uuid').equalsIgnoreCase(weaponId!).toArray();
+        return db.weapons.where('urlEncodedName').equalsIgnoreCase(weaponName!).toArray();
     });
 
     return (
             <div className="weapons-page-grid">
             {
-            weaponData?.map((weapon: Weapon) => (
-                weapon.skins.map((skin: Skin) => (
-                <Link to={`/valorant/weapons/${weapon.uuid}/skin/${skin.uuid}`}>
+            weaponData?.map((weapon: WeaponWithUrlName) => (
+                weapon.data.skins.map((skin: Skin, i: number) => (
+                <Link to={`/valorant/weapons/${weapon.urlEncodedName}/skin/${weapon.urlEncodedSkins[i].urlEncodedName}`}>
                     <div className='weapon-display'>
                         <SimpleSkinDisplay {...skin}/>
                     </div>

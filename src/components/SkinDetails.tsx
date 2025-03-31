@@ -8,7 +8,7 @@ import SkinDisplay from './SkinDisplay';
 
 export default function SkinDetails() {
 
-    const {weaponId, skinId} = useParams()
+    const {weaponName, skinName} = useParams()
     const [skinIndex, setSkinIndex] = useState<number>();
     const [skin, setSkin] = useState<Skin>();
     const [loading, setLoading] = useState(true);
@@ -16,13 +16,13 @@ export default function SkinDetails() {
     //? Would be nice to store skins in a separate database, or store so I can look them up
     //? Instead of having to search through the array of skins like I am about to do
     const weaponData = useLiveQuery(() => {
-        return db.weapons.where('uuid').equalsIgnoreCase(weaponId!).toArray();
+        return db.weapons.where('urlEncodedName').equalsIgnoreCase(weaponName!).toArray();
     });
 
     useEffect(() => {
         if(weaponData !== undefined) {
-            const skins = weaponData[0].skins;
-            let index = skins.findIndex(skin => skin.uuid === skinId)
+            const skins = weaponData[0].urlEncodedSkins;
+            let index = skins.findIndex(skin => skin.urlEncodedName === skinName)
             setSkinIndex(index);
 
         }
@@ -30,7 +30,7 @@ export default function SkinDetails() {
 
     useEffect(() => {
         if(weaponData !== undefined && skinIndex !== undefined) {
-            setSkin(weaponData[0].skins[skinIndex]);
+            setSkin(weaponData[0].data.skins[skinIndex]);
             setLoading(false);
         }
     }, [skinIndex])

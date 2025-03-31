@@ -7,6 +7,7 @@ import SimpleSkinDisplay from './SimpleSkinDisplay';
 import SkinDisplay from './SkinDisplay';
 import '../styles/WeaponsPage.css';
 import { PlayerLoadoutGun } from '@mrbabalafe/valorant-api-helper/build/api/pvp/definitions/PlayerLoadoutGun';
+import { WeaponWithUrlName } from '../types/WeaponWithUrlName';
 
 export default function ProfileWeaponDisplay(gun: PlayerLoadoutGun) {
     
@@ -17,10 +18,10 @@ export default function ProfileWeaponDisplay(gun: PlayerLoadoutGun) {
     return (
             <div className='weapon-display'>
                     {
-                    weaponData?.map((weapon: Weapon) => (
+                    weaponData?.map((weapon: WeaponWithUrlName) => (
                         <>
                             {
-                            weapon.skins.map((skin: Skin) => (
+                            weapon.data.skins.map((skin: Skin) => (
                                 <>
                                     {skin.uuid === gun.SkinID 
                                     ? <SimpleSkinDisplay {...skin} /> 

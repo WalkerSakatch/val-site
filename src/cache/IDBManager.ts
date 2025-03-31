@@ -1,11 +1,13 @@
 import Dexie, { Table } from "dexie";
-import { getMaps, getWeapons, getAgents, Map, Weapon, Agent } from "@mrbabalafe/valorant-api-helper";
+import { getMaps, getWeapons, getAgents, Map, Weapon, Agent, Skin } from "@mrbabalafe/valorant-api-helper";
 import { AgentWithUrlName } from "../types/AgentWithUrlName";
 import { MapWithUrlName } from "../types/MapWithUrlName";
+import { WeaponWithUrlName } from "../types/WeaponWithUrlName";
+import { SkinWithUrlName } from "../types/SkinWithUrlName";
 
 export class IDBManager extends Dexie {
 
-    weapons!: Table<Weapon>;
+    weapons!: Table<WeaponWithUrlName>;
     maps!: Table<MapWithUrlName>;
     agents!: Table<AgentWithUrlName>;
 
@@ -13,7 +15,7 @@ export class IDBManager extends Dexie {
         super('bmbl-db');
         //Version gets multiplied by 10 for some reason, so this is actually v1
         this.version(0.1).stores({
-            'weapons': 'uuid, displayName, category, defaultSkinUuid, displayIcon, killStreamIcon, assetPath, weaponStats, shopData, skins',
+            'weapons': 'data.uuid, data.displayName, data.category, data.defaultSkinUuid, data.displayIcon, data.killStreamIcon, data.assetPath, data.weaponStats, data.shopData, data.skins, urlEncodedName, urlEncodedSkins',
             'maps': 'data.uuid, data.displayName, data.coordinates, data.displayIcon, data.listViewIcon, data.splash, data.assetPath, data.mapUrl, data.xMultiplier, data.yMultiplier, data.xScalarToAdd, data.yScalarToAdd, data.callouts, urlEncodedName',
             'agents': 'data.uuid, data.displayName, data.data.description, data.developerName, data.characterTags, data.displayIcon, data.displayIconSmall, data.bustPortrait, data.fullPortrait, data.fullPortraitV2, data.killfeedPortrait, data.background, data.backgroundGradientColors, data.assetPath, data.isFullPortraitRightFacing, data.isPlayableCharacter, data.isAvailableForTest, data.isBaseContent, data.role, data.abilities, data.voiceLine, urlEncodedName'
         });
@@ -21,13 +23,14 @@ export class IDBManager extends Dexie {
 
     async populateWeapons() {
         let weapons = (await getWeapons()).data;
+        let weaponsWithUrlNames = this.makeWeaponWithUrlNameArray(weapons);
         //If Cannot bulk put to db, try putting one at a time.
         try {
-            this.weapons.bulkPut(weapons);
+            this.weapons.bulkPut(weaponsWithUrlNames);
             // console.log("Added to weapon db", weapons)
         } catch {
-            console.log("Could not add to weapon db", weapons);
-            weapons.forEach(weapon => {
+            console.log("Could not add to weapon db", weaponsWithUrlNames);
+            weaponsWithUrlNames.forEach(weapon => {
                 try {
                     this.weapons.put(weapon)
                     // console.log("Added to weapon db", weapon);
@@ -50,7 +53,7 @@ export class IDBManager extends Dexie {
             mapsWithUrlNames.forEach(map => {
                 try {
                     this.maps.put(map);
-                    console.log("Added to map db", map);
+                    // console.log("Added to map db", map);
                 } catch {
                     console.log("Could not add to map db", map)
                 }
@@ -99,6 +102,22 @@ export class IDBManager extends Dexie {
             return newObj;
         });
         return mapsWithUrlNames; 
+    }
+
+    makeWeaponWithUrlNameArray(weapons: Weapon[]): WeaponWithUrlName[] {
+        let weaponsWithUrlNames = weapons.map(weapon => {
+            let newObj: WeaponWithUrlName = { data: weapon, urlEncodedName: this.cleanseNameForUrl(weapon.displayName), urlEncodedSkins: this.makeSkinWithUrlNameArray(weapon.skins)}
+            return newObj;
+        });
+        return weaponsWithUrlNames;
+    }
+
+    makeSkinWithUrlNameArray(skins: Skin[]): SkinWithUrlName[] {
+        let skisWithUrlNames = skins.map(skin => {
+            let newObj: SkinWithUrlName = { data : skin, urlEncodedName: this.cleanseNameForUrl(skin.displayName)}
+            return newObj;
+        })
+        return skisWithUrlNames;
     }
 }
 

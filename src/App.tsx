@@ -29,8 +29,8 @@ function App() {
 
           {/* WEAPONS */}
           <Route path='/valorant/weapons' element={<WeaponsPage />} />
-          <Route path='/valorant/weapons/:weaponId' element={<WeaponDetails />}/>
-          <Route path='/valorant/weapons/:weaponId/skin/:skinId' element={<SkinDetails />}/>
+          <Route path='/valorant/weapons/:weaponName' element={<WeaponDetails />}/>
+          <Route path='/valorant/weapons/:weaponName/skin/:skinName' element={<SkinDetails />}/>
 
           {/* MAPS */}
           <Route path='/valorant/maps' element={<MapsPage />} />

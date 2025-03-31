@@ -5,6 +5,7 @@ import { db } from '../cache/IDBManager';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Link } from 'react-router-dom';
 import '../styles/WeaponsPage.css';
+import { WeaponWithUrlName } from '../types/WeaponWithUrlName';
 
 export default function WeaponsPage() {
 
@@ -13,11 +14,11 @@ export default function WeaponsPage() {
         return db.weapons.toArray()
     });
 
-    const [firstColumn, setFirstColumn] = useState<Weapon[]>([])
-    const [secondColumn, setSecondColumn] = useState<Weapon[]>([])
-    const [thirdColumn, setThirdColumn] = useState<Weapon[]>([])
-    const [fourthColumn, setFourthColumn] = useState<Weapon[]>([])
-    const [fifthColumn, setFifthColumn] = useState<Weapon[]>([])
+    const [firstColumn, setFirstColumn] = useState<WeaponWithUrlName[]>([])
+    const [secondColumn, setSecondColumn] = useState<WeaponWithUrlName[]>([])
+    const [thirdColumn, setThirdColumn] = useState<WeaponWithUrlName[]>([])
+    const [fourthColumn, setFourthColumn] = useState<WeaponWithUrlName[]>([])
+    const [fifthColumn, setFifthColumn] = useState<WeaponWithUrlName[]>([])
 
 
     useEffect(() => {
@@ -27,11 +28,11 @@ export default function WeaponsPage() {
 
         let tempWeaponData = weaponData.sort((a, b) => sortWeapons(a, b));
         console.log(tempWeaponData);
-        setFirstColumn(weaponData.slice(0, 5).sort((a, b) => a.shopData.cost - b.shopData.cost));
-        setSecondColumn((weaponData.slice(5, 7).sort((a, b) => a.shopData.cost - b.shopData.cost)).concat(weaponData.slice(7, 9).sort((a, b) => a.shopData.cost - b.shopData.cost)));
-        setThirdColumn(weaponData.slice(9, 13).sort((a, b) => a.shopData.cost - b.shopData.cost).sort((a, b) => a.displayName.localeCompare(b.displayName)));
-        setFourthColumn(weaponData.slice(13, 16).sort((a, b) => a.shopData.cost - b.shopData.cost).concat(weaponData.slice(16, 18).sort((a, b) => a.shopData.cost - b.shopData.cost)));
-        setFifthColumn(weaponData.slice(18, 19).sort((a, b) => a.shopData.cost - b.shopData.cost));
+        setFirstColumn(weaponData.slice(0, 5).sort((a, b) => a.data.shopData.cost - b.data.shopData.cost));
+        setSecondColumn((weaponData.slice(5, 7).sort((a, b) => a.data.shopData.cost - b.data.shopData.cost)).concat(weaponData.slice(7, 9).sort((a, b) => a.data.shopData.cost - b.data.shopData.cost)));
+        setThirdColumn(weaponData.slice(9, 13).sort((a, b) => a.data.shopData.cost - b.data.shopData.cost).sort((a, b) => a.data.displayName.localeCompare(b.data.displayName)));
+        setFourthColumn(weaponData.slice(13, 16).sort((a, b) => a.data.shopData.cost - b.data.shopData.cost).concat(weaponData.slice(16, 18).sort((a, b) => a.data.shopData.cost - b.data.shopData.cost)));
+        setFifthColumn(weaponData.slice(18, 19).sort((a, b) => a.data.shopData.cost - b.data.shopData.cost));
         
 
         // setSortedSidearms(testy)
@@ -49,10 +50,10 @@ export default function WeaponsPage() {
 
     }, [firstColumn, secondColumn, thirdColumn, fourthColumn, fifthColumn]);
 
-    function sortWeapons(a: Weapon, b: Weapon): number {
+    function sortWeapons(a: WeaponWithUrlName, b: WeaponWithUrlName): number {
         //?Some weird ass function that takes the weapons and sorts
         let order = ["sidearm", "smg", "shotgun", "rifle", "sniper", "heavy", "melee"]        
-        return order.indexOf(a.category.split('::')[1].toLocaleLowerCase()) - order.indexOf(b.category.split('::')[1].toLocaleLowerCase())
+        return order.indexOf(a.data.category.split('::')[1].toLocaleLowerCase()) - order.indexOf(b.data.category.split('::')[1].toLocaleLowerCase())
     }
 
     //{weaponData?.sort((a, b) => a.category.localeCompare(b.category)).map((weapon: Weapon) => (
@@ -61,8 +62,8 @@ export default function WeaponsPage() {
         {[firstColumn, secondColumn, thirdColumn, fourthColumn, fifthColumn].map((column, columnIndex) => (
             <div key={columnIndex} className="weapon-grid-column">
                 {column.map((weapon) => (
-                    <Link to={`/valorant/weapons/${weapon.uuid}`} >
-                        <WeaponDisplay {...weapon} key={weapon.uuid}/>
+                    <Link to={`/valorant/weapons/${weapon.urlEncodedName}`} >
+                        <WeaponDisplay {...weapon} key={weapon.data.uuid}/>
                     </Link>
                 ))}
             </div>

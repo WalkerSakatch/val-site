@@ -4,14 +4,15 @@ import {Skin, Weapon} from "@mrbabalafe/valorant-api-helper";
 import SkinDisplay from './SkinDisplay';
 import SimpleSkinDisplay from './SimpleSkinDisplay';
 import '../styles/WeaponsPage.css';
+import { WeaponWithUrlName } from '../types/WeaponWithUrlName';
 
-export default function WeaponDisplay(weapon: Weapon) {
-    let defaultSkinUUID = weapon.defaultSkinUuid;
+export default function WeaponDisplay(weapon: WeaponWithUrlName) {
+    let defaultSkinUUID = weapon.data.defaultSkinUuid;
     const defaultSkin = getDefaultSkin();
 
     function getDefaultSkin(): Skin {
         let retVal!: Skin;
-        weapon.skins.forEach(skin => {
+        weapon.data.skins.forEach(skin => {
           if(skin.uuid === defaultSkinUUID) {
             retVal = skin;
           }

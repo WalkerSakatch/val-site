@@ -5,7 +5,7 @@ import React from "react";
 
 export default function AbilityDetails(props: { ability: Ability }) {
 	return (
-		<div className="ability_container">
+		<div className="ability_container" style={{borderTop: '4px solid #ff4d00'}}>
 			<h1>{props.ability.displayName}</h1>
 			<img src={props.ability.displayIcon} alt={props.ability.displayName}></img>
 			<h3>{props.ability.description}</h3>
