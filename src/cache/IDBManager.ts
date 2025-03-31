@@ -14,7 +14,7 @@ export class IDBManager extends Dexie {
     constructor() {
         super('bmbl-db');
         //Version gets multiplied by 10 for some reason, so this is actually v1
-        this.version(0.1).stores({
+        this.version(0.2).stores({
             'weapons': 'data.uuid, data.displayName, data.category, data.defaultSkinUuid, data.displayIcon, data.killStreamIcon, data.assetPath, data.weaponStats, data.shopData, data.skins, urlEncodedName, urlEncodedSkins',
             'maps': 'data.uuid, data.displayName, data.coordinates, data.displayIcon, data.listViewIcon, data.splash, data.assetPath, data.mapUrl, data.xMultiplier, data.yMultiplier, data.xScalarToAdd, data.yScalarToAdd, data.callouts, urlEncodedName',
             'agents': 'data.uuid, data.displayName, data.data.description, data.developerName, data.characterTags, data.displayIcon, data.displayIconSmall, data.bustPortrait, data.fullPortrait, data.fullPortraitV2, data.killfeedPortrait, data.background, data.backgroundGradientColors, data.assetPath, data.isFullPortraitRightFacing, data.isPlayableCharacter, data.isAvailableForTest, data.isBaseContent, data.role, data.abilities, data.voiceLine, urlEncodedName'
