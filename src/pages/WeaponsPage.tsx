@@ -27,7 +27,7 @@ export default function WeaponsPage() {
         }
 
         let tempWeaponData = weaponData.sort((a, b) => sortWeapons(a, b));
-        console.log(tempWeaponData);
+        // console.log(tempWeaponData);
         setFirstColumn(weaponData.slice(0, 5).sort((a, b) => a.data.shopData.cost - b.data.shopData.cost));
         setSecondColumn((weaponData.slice(5, 7).sort((a, b) => a.data.shopData.cost - b.data.shopData.cost)).concat(weaponData.slice(7, 9).sort((a, b) => a.data.shopData.cost - b.data.shopData.cost)));
         setThirdColumn(weaponData.slice(9, 13).sort((a, b) => a.data.shopData.cost - b.data.shopData.cost).sort((a, b) => a.data.displayName.localeCompare(b.data.displayName)));
@@ -42,11 +42,11 @@ export default function WeaponsPage() {
     },[weaponData]);
 
     useEffect(() => {
-        console.log("firstColumn", firstColumn)
-        console.log("secondColumn", secondColumn)
-        console.log("thirdColumn", thirdColumn)
-        console.log("fourthColumn", fourthColumn)
-        console.log("fifthColumn", fifthColumn)
+        // console.log("firstColumn", firstColumn)
+        // console.log("secondColumn", secondColumn)
+        // console.log("thirdColumn", thirdColumn)
+        // console.log("fourthColumn", fourthColumn)
+        // console.log("fifthColumn", fifthColumn)
 
     }, [firstColumn, secondColumn, thirdColumn, fourthColumn, fifthColumn]);
 
